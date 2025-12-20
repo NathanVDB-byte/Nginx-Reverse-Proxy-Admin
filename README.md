@@ -54,7 +54,7 @@ cd nginx-admin-panel
 ### 2. Lancer l'installation automatisée
 
 Le projet inclut un script d'installation (`install.sh`) qui automatise :
-- Création du répertoire `/opt/nginx-admin` et `/var/www/nginx-admin`
+- Création du répertoire `/opt/nginx-admin`
 - Création de l'utilisateur système `nginxadmin`
 - Compilation de l'API Go
 - Déploiement des scripts bash
