@@ -310,10 +310,10 @@ nginxadmin ALL=(ALL) NOPASSWD: /bin/systemctl reload nginx
 
 | Chemin | Propriétaire | Permissions | Notes |
 |--------|--------------|-----------|--------|
-| `/opt/nginx-admin/api/` | `nginxadmin:nginxadmin` | 755 | API Go exécutable |
+| `/opt/nginx-admin/api/` | `nginxadmin:nginxadmin` | 750 | API Go exécutable |
 | `/opt/nginx-admin/scripts/` | `root:root` | 700 | Scripts bash (exec root) |
-| `/var/www/nginx-admin/` | `www-data:www-data` | 755 | Web files PHP |
-| `/etc/nginx/sites-available/` | `root:root` | 755 | Vhosts générés (props root) |
+| `/var/www/nginx-admin/` | `www-data:www-data` | 750 | Web files PHP |
+| `/etc/nginx/sites-available/` | `root:root` | 750 | Vhosts générés (props root) |
 
 ### Service systemd
 
