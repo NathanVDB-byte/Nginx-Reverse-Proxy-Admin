@@ -77,7 +77,7 @@ sudo bash install.sh
 systemctl status nginx-admin-api
 
 # Frontend PHP
-curl http://127.0.0.1:8080/index.php
+curl http://127.0.0.1:80/index.php
 ```
 
 ---
@@ -299,7 +299,7 @@ Les droits `sudo` sont restreints au strict nécessaire via `/etc/sudoers.d/ngin
 
 ```bash
 # Permettre à nginxadmin d'exécuter les scripts bash sans mot de passe
-nginxadmin ALL=(ALL) NOPASSWD: /opt/nginx-admin/scripts/nginx-*.sh
+nginxadmin ALL=(root) NOPASSWD: /opt/nginxadmin/scripts/nginx-create-vhost.sh, /opt/nginxadmin/scripts/nginx-enable-vhost.sh, /opt/nginxadmin/scripts/nginx-disable-vhost.sh, /opt/nginxadmin/scripts/nginx-delete-vhost.sh, /opt/nginxadmin/scripts/nginx-save-conf.sh, /opt/nginxadmin/scripts/nginx-certbot.sh
 
 # Permettre à nginxadmin d'exécuter nginx -t et systemctl reload nginx sans mot de passe
 nginxadmin ALL=(ALL) NOPASSWD: /usr/sbin/nginx -t
