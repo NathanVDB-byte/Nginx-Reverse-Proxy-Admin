@@ -90,32 +90,44 @@ curl http://127.0.0.1:80/index.php
 ## 📁 Structure du projet
 
 ```
-nginx-admin-panel/
-├── README.md                          # Ce fichier
-├── install.sh                         # Script d'installation complet
-│
+/opt/nginx-admin/
 ├── api/
-│   └── src/
-│       └── cmd/
-│           └── nginx-admin-api/
-│               └── main.go            # API REST en Go (port 9000)
+│   ├── nginx-admin-api        # Binaire Go compilé (API REST)
+│   ├── config.yaml            # Configuration optionnelle de l'API (si utilisée)
+│   └── src/                   # Sources Go (optionnel, si conservées sur le serveur)
+│       ├── cmd/
+│       │   └── nginx-admin-api/
+│       │       └── main.go    # Point d'entrée de l'API
+│       └── internal/
+│           └── service/
+│               └── vhost.go   # Logique métier de gestion des vhosts
 │
-├── scripts/                           # Scripts bash (déployés dans /opt/nginx-admin/scripts/)
-│   ├── nginx-create-vhost.sh         # Créer un vhost HTTP
-│   ├── nginx-enable-vhost.sh         # Activer un vhost
-│   ├── nginx-disable-vhost.sh        # Désactiver un vhost
-│   ├── nginx-delete-vhost.sh         # Supprimer un vhost
-│   ├── nginx-save-conf.sh            # Sauvegarder/éditer un vhost
-│   └── nginx-certbot.sh              # Émettre un certificat HTTPS
+├── web/
+│   ├── index.php              # Tableau de bord principal
+│   ├── actions.php            # Endpoints d'actions (appels API)
+│   ├── login.php              # Formulaire de connexion
+│   ├── logout.php             # Déconnexion
+│   ├── auth.php               # Vérification d'authentification
+│   ├── config.php             # Configuration générale (chemins, API)
+│   ├── config-auth.php        # Identifiants et mot de passe hashé
+│   ├── css/
+│   │   └── style.css          # Styles CSS du panel
+│   ├── js/
+│   │   └── script.js          # Scripts JS pour l'interface
+│   └── templates/
+│       └── header.php         # Template d'en-tête réutilisable
 │
-└── web/                              # Frontend PHP (déployé dans /var/www/nginx-admin/)
-    ├── index.php                     # Tableau de bord
-    ├── login.php                     # Authentification
-    ├── logout.php                    # Déconnexion
-    ├── actions.php                   # Endpoints d'actions (appels API)
-    ├── edit.php                      # Édition de vhost
-    ├── config.php                    # Config générale (API_URL, API_KEY)
-    └── config-auth.php               # Config authentification (hash du mot de passe)
+├── scripts/
+│   ├── nginx-create-vhost.sh  # Création d'un vhost HTTP
+│   ├── nginx-enable-vhost.sh  # Activation d'un vhost
+│   ├── nginx-disable-vhost.sh # Désactivation d'un vhost
+│   ├── nginx-delete-vhost.sh  # Suppression d'un vhost
+│   ├── nginx-save-conf.sh     # Édition de la configuration d'un vhost
+│   └── nginx-certbot.sh       # Émission d'un certificat HTTPS via Certbot
+│
+└── logs/
+    ├── api.log                # Logs de l'API Go (optionnel)
+    └── web-error.log          # Logs applicatifs PHP (optionnel)
 ```
 
 ---
