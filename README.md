@@ -2,6 +2,8 @@
 
 Un **panneau d'administration web minimaliste et sécurisé** pour gérer les vhosts Nginx sur Debian 12 sans éditer manuellement les fichiers de configuration. Créez, activez, désactivez et supprimez des vhosts HTTP, puis générez automatiquement des certificats HTTPS via Let's Encrypt (Certbot --nginx).
 
+Ce projet est conçu par un **administrateur système et réseau**, non développeur, qui souhaite une solution simple et automatisée pour faciliter la gestion du reverse proxy via Nginx, sans passer par l’édition manuelle des fichiers de configuration.
+
 ---
 
 ## 🎯 Vue d'ensemble
@@ -53,7 +55,7 @@ cd nginx-admin-panel
 
 ### 2. Lancer l'installation automatisée
 
-Le projet inclut un script d'installation (`install.sh`) qui automatise :
+Le projet inclut un script d'installation (`install-nginx-admin.sh`) qui automatise :
 - Création du répertoire `/opt/nginx-admin`
 - Création de l'utilisateur système `nginxadmin`
 - Compilation de l'API Go
@@ -62,7 +64,10 @@ Le projet inclut un script d'installation (`install.sh`) qui automatise :
 - Mise en place du service systemd
 
 ```bash
-sudo bash install.sh
+apt install sudo
+sudo nano install-nginx-admin.sh
+sudo chmod +x install-nginx-admin.sh
+sudo ./install-nginx-admin.sh
 ```
 
 **À adapter dans le script avant lancement** :
