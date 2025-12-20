@@ -44,7 +44,7 @@ sudo apt-get install -y \
 
 ---
 
-## 🚀 Installation rapide
+## 🚀 Installation rapide (2 CHOIX)
 
 ### 1. Cloner le dépôt
 
