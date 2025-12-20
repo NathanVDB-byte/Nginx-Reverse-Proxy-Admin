@@ -12,7 +12,7 @@ sudo chmod 640 /opt/nginx-admin/scripts/*.sh
 ```bash
 nginxadmin ALL=(root) NOPASSWD: /usr/sbin/nginx -t, /bin/systemctl reload nginx
 nginxadmin ALL=(root) NOPASSWD: ${APP_ROOT}/scripts/nginx-create-vhost.sh, ${APP_ROOT}/scripts/nginx-enable-vhost.sh, ${APP_ROOT}/scripts/nginx-disable-vhost.sh, ${APP_ROOT}/scripts/nginx-delete-vhost.sh, ${APP_ROOT}/scripts/nginx-save-conf.sh, ${APP_ROOT}/scripts/nginx-certbot.sh
-```bash
+```
 
 # Faire le lien site-available et site-enabled de l'application
 ```bash
@@ -28,3 +28,4 @@ nginx -t && systemctl reload nginx
 ```bash
 php -r 'echo password_hash("TonMotDePasseFortIci", PASSWORD_DEFAULT) . PHP_EOL;'
 ```
+
