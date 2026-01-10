@@ -1,3 +1,4 @@
+```txt
 /opt/nginx-admin/
 ├── api/
 │   ├── nginx-admin-api        # binaire Go compilé
@@ -38,3 +39,4 @@
 └── logs/
     ├── api.log        # si tu logues l’API ici
     └── web-error.log  # éventuels logs applicatifs PHP
+```
