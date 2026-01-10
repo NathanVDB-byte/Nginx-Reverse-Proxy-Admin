@@ -39,7 +39,9 @@ sudo apt-get install -y \
   php8.2-cli \
   curl \
   openssl \
-  golang-go
+  golang-go \
+  sqlite3 \
+  php8.2-sqlite3
 ```
 
 ---
@@ -102,14 +104,16 @@ curl http://127.0.0.1:80/index.php
 │           └── service/
 │               └── vhost.go   # Logique métier de gestion des vhosts
 │
+├── db/
+│   └── auth.db # Identifiants et mot de passe hashé
+│
 ├── web/
 │   ├── index.php              # Tableau de bord principal
 │   ├── actions.php            # Endpoints d'actions (appels API)
 │   ├── login.php              # Formulaire de connexion
 │   ├── logout.php             # Déconnexion
 │   ├── auth.php               # Vérification d'authentification
-│   ├── config.php             # Configuration générale (chemins, API)
-│   ├── config-auth.php        # Identifiants et mot de passe hashé
+│   ├── config.php             # Configuration générale (chemins, API)    
 │   ├── css/
 │   │   └── style.css          # Styles CSS du panel
 │   ├── js/
@@ -272,11 +276,11 @@ Accès via `http://panel.local/` (ou le domaine configuré).
 4. Vérification du hash du mot de passe (`password_verify()`)
 5. Création de `$_SESSION['loggedin']` et redirection vers `index.php`
 
-Le mot de passe initial est hashé lors de l'installation dans `config-auth.php`.
+Le mot de passe initial est hashé lors de l'installation dans une base de donnée SQLITE `auth.db`.
 
 #### Configuration
 
-Deux fichiers de configuration PHP sont générés par `install.sh` :
+Deux fichiers de configuration PHP et SQLITE sont générés par `install.sh` :
 
 **`config.php`** :
 ```php
@@ -290,11 +294,21 @@ $API_URL = 'http://127.0.0.1:9000/v1';
 $API_KEY = '...votre clé API...';
 ```
 
-**`config-auth.php`** :
-```php
-<?php
-const ADMIN_USERNAME = 'admin';
-const ADMIN_PASSWORD_HASH = '$2y$10$...hash bcrypt...';
+**`auth.db`** :
+```sqlite3
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+INSERT INTO users (username, password_hash) 
+VALUES ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
+```
+
+```bash
+chown nginxadmin:nginxadmin /opt/nginx-admin/db/auth.db
+chmod 640 /opt/nginx-admin/db/auth.db
 ```
 
 ---
@@ -502,4 +516,4 @@ Pour des questions, remarques ou support :
 
 ---
 
-**Dernier update** : décembre 2025 | **Debian** : 12 | **Go** : 1.20+ | **PHP** : 8.2+
+**Dernier update** : janvier 2026 | **Debian** : 12 | **Go** : 1.20+ | **PHP** : 8.2+
