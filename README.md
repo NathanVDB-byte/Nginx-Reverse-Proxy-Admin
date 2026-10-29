@@ -51,7 +51,7 @@ sudo apt-get install -y \
 ### 1. Cloner le dépôt
 
 ```bash
-git clone https://github.com/yourusername/nginx-admin-panel.git
+git clone https://github.com/NathanVDB-Byte/nginx-admin-panel.git
 cd nginx-admin-panel
 ```
 
